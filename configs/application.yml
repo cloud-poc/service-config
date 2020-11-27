@@ -1,1 +1,3 @@
-test.config: test
+logging:
+  config: logback-spring.xml
+  path: tmp/logs
