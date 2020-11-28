@@ -1,4 +1,7 @@
 spring:
+  application:
+    profiles:
+      include: common
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
     pool-name: SpringBootHikariCP
