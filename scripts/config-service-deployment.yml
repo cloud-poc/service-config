@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: config-service-deployment
+  labels:
+    app: config-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: config-service
+  template:
+    metadata:
+      labels:
+        app: config-service
+    spec:
+      containers:
+        - name: config-service
+          image: docker.io/akjamie/config-service:2.0.0
+          env:
+            - name: CONFIG_ROOT_PATH
+              value: "/app/data/service-configs"
+          ports:
+            - containerPort: 8888
+          volumeMounts:
+            - mountPath: "/app/data"
+              name: storage
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: pvc-config-service
